@@ -9,7 +9,10 @@ const port = 8080;
 app.use(express.static('../frontend'));
 
 app.get('/calculate', (req, res) => {
-    const expression = req.query.expression;
+    let expression = req.query.expression;
+
+    expression = expression.replace('%', '/100');
+
     try{
         const result = eval(expression);
         res.send(result.toString());
